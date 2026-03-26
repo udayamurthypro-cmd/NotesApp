@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class NoteDb : RoomDatabase() {
 
-    abstract var noteDao : NoteDao
+    abstract fun noteDao() : NoteDao
 
     companion object {
         @Volatile
@@ -19,12 +19,12 @@ abstract class NoteDb : RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
-                        context = context,
+                        context.applicationContext,
                         NoteDb::class.java,
                         "notes_database"
                     ).build()
+                    INSTANCE = instance
                 }
-                INSTANCE = instance
                 return instance
             }
         }
