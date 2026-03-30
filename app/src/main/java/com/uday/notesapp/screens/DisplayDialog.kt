@@ -21,38 +21,42 @@ import com.uday.notesapp.roomdb.Note
 import com.uday.notesapp.viewmodel.NoteViewModel
 
 @Composable
-fun DisplayDialog(noteViewModel: NoteViewModel) {
+fun DisplayDialog(noteViewModel: NoteViewModel,
+                  showDialog : Boolean,
+                  onDismiss : () -> Unit) {
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     val selectedColor by remember { mutableIntStateOf(Color.Blue.toArgb()) }
 
-
-    AlertDialog(
-        onDismissRequest = {},
-        title = { Text("Enter Note")},
-        text = {
-            Column(){
-                TextField(
-                    value = title,
-                    onValueChange = { title = it },
-                    label = { Text("Note Title") }
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                TextField(
-                    value = description,
-                    onValueChange = { description = it },
-                    label = { Text("Note description") }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+    if(showDialog) {
+        AlertDialog(
+            onDismissRequest = { onDismiss() },
+            title = { Text("Enter Note") },
+            text = {
+                Column() {
+                    TextField(
+                        value = title,
+                        onValueChange = { title = it },
+                        label = { Text("Note Title") }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TextField(
+                        value = description,
+                        onValueChange = { description = it },
+                        label = { Text("Note description") }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+            },
+            confirmButton = {
+                Button(onClick = {
+                    val note = Note(0, title, description, selectedColor)
+                    noteViewModel.insertNote(note)
+                }) {
+                    Text("Save Note")
+                }
             }
-        },
-        confirmButton = {
-            Button(onClick = {
-                val note = Note(0,title,description,selectedColor)
-            }) {
-                Text("Save Note")
-            }
-        }
-    )
+        )
+    }
 }
