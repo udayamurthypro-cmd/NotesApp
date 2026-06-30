@@ -11,7 +11,7 @@ class NoteViewModel(private val respository: NotesRepository) : ViewModel() {
 
     val allNotes: LiveData<List<Note>> = respository.allNotes
 
-    suspend fun insertNote(note: Note) {
+    fun insertNote(note: Note) {
         viewModelScope.launch {
             respository.insertNote(note)
         }

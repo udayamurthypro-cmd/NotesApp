@@ -27,7 +27,7 @@ fun DisplayDialog(noteViewModel: NoteViewModel,
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    val selectedColor by remember { mutableIntStateOf(Color.Blue.toArgb()) }
+    var selectedColor by remember { mutableIntStateOf(Color.Blue.toArgb()) }
 
     if(showDialog) {
         AlertDialog(
@@ -47,12 +47,17 @@ fun DisplayDialog(noteViewModel: NoteViewModel,
                         label = { Text("Note description") }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
+
+                    MyColorPicker(selectedColor = Color(selectedColor),
+                        onColorSelected = { selectedColor = it.toArgb() })
+
                 }
             },
             confirmButton = {
                 Button(onClick = {
                     val note = Note(0, title, description, selectedColor)
                     noteViewModel.insertNote(note)
+                    onDismiss()
                 }) {
                     Text("Save Note")
                 }

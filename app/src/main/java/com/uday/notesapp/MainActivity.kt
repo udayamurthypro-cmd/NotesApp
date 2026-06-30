@@ -16,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.uday.notesapp.repository.NotesRepository
 import com.uday.notesapp.roomdb.Note
 import com.uday.notesapp.roomdb.NoteDb
@@ -26,7 +25,6 @@ import com.uday.notesapp.viewmodel.NoteViewModelFactory
 import com.uday.notesapp.screens.DisplayNotesList
 import androidx.core.graphics.toColorInt
 import com.uday.notesapp.screens.DisplayDialog
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -41,7 +39,7 @@ class MainActivity : ComponentActivity() {
         val note1 = Note(0,"Android Course","Welcome to Android Course, Kindly share and rate us 5 stars",
             "#595977".toColorInt())
 
-        lifecycleScope.launch {  viewModel.insertNote(note1) }
+        viewModel.insertNote(note1)
 
         setContent {
             NotesAppTheme {
