@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.toColorInt
 
 @Composable
 fun MyColorPicker(
@@ -27,16 +26,18 @@ fun MyColorPicker(
 
     //Colors List
     val colorsList = listOf(
-        Color("#f59697".toColorInt()),
-        Color("#f39697".toColorInt()),
-        Color("#f49497".toColorInt()),
-        Color("#f49597".toColorInt()),
-        Color("#f69597".toColorInt()),
-        Color("#f79297".toColorInt()),
-        Color("#f79997".toColorInt()),
-        Color("#f88007".toColorInt()),
-        Color("#f66987".toColorInt()),
-        Color("#f58807".toColorInt()),
+        Color(0xFFF44336), // Red
+        Color(0xFFE91E63), // Pink
+        Color(0xFF9C27B0), // Purple
+        Color(0xFF673AB7), // Deep Purple
+        Color(0xFF3F51B5), // Indigo
+        Color(0xFF2196F3), // Blue
+        Color(0xFF03A9F4), // Light Blue
+        Color(0xFF00BCD4), // Cyan
+        Color(0xFF009688), // Teal
+        Color(0xFF4CAF50), // Green
+        Color(0xFFFFEB3B), // Yellow
+        Color(0xFFFF9800), // Orange
     )
 
     LazyRow(
